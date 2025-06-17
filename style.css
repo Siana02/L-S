@@ -960,3 +960,64 @@ body {
   .reviews-carousel { padding: 0.7em 0.2em 1em 0.2em; }
   .review-text { font-size: 0.95em; }
 }
+.about-section {
+  background: #fff9fa;
+  padding: 60px 0;
+}
+.about-container {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.about-us, .newsletter-signup {
+  flex: 1 1 350px;
+  min-width: 290px;
+}
+.about-us h2,
+.newsletter-signup h3 {
+  font-family: 'Parisienne', cursive;
+  color: #e75480;
+  margin-bottom: 16px;
+}
+.about-us p, .newsletter-signup p {
+  font-family: 'Libre Franklin', sans-serif;
+  color: #333;
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+.newsletter-form {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+}
+.newsletter-form input[type="email"] {
+  padding: 10px 14px;
+  border: 1px solid #e75480;
+  border-radius: 4px;
+  font-size: 1em;
+  flex: 1;
+}
+.newsletter-form button {
+  background: #e75480;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.newsletter-form button:hover {
+  background: #c4375f;
+}
+@media (max-width: 800px) {
+  .about-container {
+    flex-direction: column;
+    gap: 32px;
+    align-items: stretch;
+  }
+}
