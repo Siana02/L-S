@@ -95,23 +95,37 @@ document.querySelectorAll('.collection-card').forEach(card => {
 // Collections Carousel for Mobile (≤ 768px)
 (function () {
   const carousel = document.querySelector('.collections-carousel');
+  if (!carousel) return;
   const cards = Array.from(carousel.children);
   let idx = 0;
+  let cardsPerView = 2;
+
   function showSlide() {
     if (window.innerWidth > 768) {
       carousel.style.transform = 'translateX(0)';
       return;
     }
-    // Show two cards at a time
-    const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(carousel).gap || 0, 10);
+    cardsPerView = 2;
+    const card = cards[0];
+    const gap = parseInt(getComputedStyle(carousel).gap) || 0;
+    const cardWidth = card.offsetWidth + gap;
+    // Limit idx to valid starting indexes (0 or 2 for 4 products and 2 per view)
+    if (idx > cards.length - cardsPerView) idx = 0;
     carousel.style.transform = `translateX(-${idx * cardWidth}px)`;
   }
+
   function nextSlide() {
     if (window.innerWidth > 768) return;
-    idx = (idx + 1) % 2; // 0 or 1 (since 4 cards, 2 at a time)
+    idx += 2;
+    if (idx >= cards.length) idx = 0;
     showSlide();
   }
+
   let timer = setInterval(nextSlide, 3000);
-  window.addEventListener('resize', showSlide);
+
+  window.addEventListener('resize', () => {
+    showSlide();
+  });
+
   showSlide();
 })();
