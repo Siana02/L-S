@@ -604,13 +604,16 @@ body {
     max-width: 98vw;
     margin: 0 auto;
   }
-  .carousel-slide,
-  .carousel-slide.active {
+  .carousel-slide {
     flex-direction: column;
     align-items: stretch;
-    position: absolute;
+    position: relative;      /* <-- CHANGED: now relative, not absolute */
     min-height: 0;
     height: auto;
+    display: none;           /* Hide all slides by default */
+  }
+  .carousel-slide.active {
+    display: flex;           /* Only show the active slide */
   }
   .carousel-img,
   .carousel-desc.glass {
