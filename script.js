@@ -81,3 +81,37 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   showSlide(current);
   setInterval(nextSlide, 2000);
 })();
+// Interactive Size Bubbles
+document.querySelectorAll('.collection-card').forEach(card => {
+  const bubbles = card.querySelectorAll('.size-bubble');
+  bubbles.forEach(bubble => {
+    bubble.addEventListener('click', () => {
+      bubbles.forEach(b => b.classList.remove('active'));
+      bubble.classList.add('active');
+    });
+  });
+});
+
+// Collections Carousel for Mobile (≤ 768px)
+(function () {
+  const carousel = document.querySelector('.collections-carousel');
+  const cards = Array.from(carousel.children);
+  let idx = 0;
+  function showSlide() {
+    if (window.innerWidth > 768) {
+      carousel.style.transform = 'translateX(0)';
+      return;
+    }
+    // Show two cards at a time
+    const cardWidth = cards[0].offsetWidth + parseInt(getComputedStyle(carousel).gap || 0, 10);
+    carousel.style.transform = `translateX(-${idx * cardWidth}px)`;
+  }
+  function nextSlide() {
+    if (window.innerWidth > 768) return;
+    idx = (idx + 1) % 2; // 0 or 1 (since 4 cards, 2 at a time)
+    showSlide();
+  }
+  let timer = setInterval(nextSlide, 3000);
+  window.addEventListener('resize', showSlide);
+  showSlide();
+})();
