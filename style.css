@@ -541,7 +541,8 @@ body {
   border: 1px solid rgba(255,255,255,0.12);
 }
 
-.product-name {
+.carousel-slide .product-name,
+.carousel-desc .product-name {
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 700;
   color: #FFFFFF;
