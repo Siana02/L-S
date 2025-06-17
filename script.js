@@ -91,21 +91,30 @@ document.querySelectorAll('.collection-card').forEach(card => {
     });
   });
 });
+// Interactive Size Bubbles
+document.querySelectorAll('.collection-card').forEach(card => {
+  const bubbles = card.querySelectorAll('.size-bubble');
+  bubbles.forEach(bubble => {
+    bubble.addEventListener('click', () => {
+      bubbles.forEach(b => b.classList.remove('active'));
+      bubble.classList.add('active');
+    });
+  });
+});
 
-
+// Responsive 2-at-a-time carousel for .collections-carousel
 (function () {
   const carousel = document.querySelector('.collections-carousel');
   if (!carousel) return;
   const cards = Array.from(carousel.children);
   let idx = 0;
-  let cardsPerView = 2;
+  const cardsPerView = 2;
   let intervalId = null;
 
   function getCardWidthWithGap() {
-    // Use getBoundingClientRect for accurate card width
     if (cards.length < 2) return cards[0].getBoundingClientRect().width;
     const cardWidth = cards[0].getBoundingClientRect().width;
-    // Find gap (gap is set in px, fallback to 0)
+    // Get gap between cards in px
     const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
     return cardWidth + gap;
   }
@@ -115,20 +124,20 @@ document.querySelectorAll('.collection-card').forEach(card => {
       carousel.style.transform = 'translateX(0)';
       return;
     }
-    cardsPerView = 2;
     let cardWidth = getCardWidthWithGap();
-    if (idx > cards.length - cardsPerView) idx = 0;
-    carousel.style.transform = `translateX(-${idx * cardWidth}px)`;
+    // Number of valid "pages" is Math.ceil(cards.length/cardsPerView)
+    // idx can be 0, 1 (for 4 cards, 2 at a time)
+    if (idx > Math.ceil(cards.length / cardsPerView) - 1) idx = 0;
+    carousel.style.transform = `translateX(-${idx * cardWidth * cardsPerView}px)`;
   }
 
   function nextSlide() {
     if (window.innerWidth > 768) return;
-    idx += 2;
-    if (idx > cards.length - cardsPerView) idx = 0;
+    idx += 1;
+    if (idx > Math.ceil(cards.length / cardsPerView) - 1) idx = 0;
     showSlide();
   }
 
-  // Always reset interval on resize to avoid weird timing
   function setupInterval() {
     if (intervalId) clearInterval(intervalId);
     intervalId = setInterval(nextSlide, 3000);
@@ -142,3 +151,4 @@ document.querySelectorAll('.collection-card').forEach(card => {
   showSlide();
   setupInterval();
 })();
+
