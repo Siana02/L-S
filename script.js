@@ -65,3 +65,19 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     }
   });
 });
+// Auto-rotating carousel for best sellers
+(function() {
+  const slides = document.querySelectorAll('.carousel-slide');
+  let current = 0;
+  function showSlide(idx) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === idx);
+    });
+  }
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+  showSlide(current);
+  setInterval(nextSlide, 2000);
+})();
