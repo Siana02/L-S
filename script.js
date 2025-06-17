@@ -90,3 +90,20 @@ document.querySelectorAll('.collection-card').forEach(card => {
       bubble.classList.add('active');
     });
 });
+// Reviews Carousel Auto-Slide
+(function() {
+  const slides = document.querySelectorAll('.reviews-carousel .review-slide');
+  if (!slides.length) return;
+  let current = 0;
+  function showSlide(idx) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === idx);
+    });
+  }
+  function nextSlide() {
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+  showSlide(current);
+  setInterval(nextSlide, 3000);
+})();
