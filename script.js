@@ -81,7 +81,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   showSlide(current);
   setInterval(nextSlide, 2000);
 })();
-// Interactive Size Bubbles
+// ==== INTERACTIVE SIZE BUBBLES ====
 document.querySelectorAll('.collection-card').forEach(card => {
   const bubbles = card.querySelectorAll('.size-bubble');
   bubbles.forEach(bubble => {
@@ -92,47 +92,57 @@ document.querySelectorAll('.collection-card').forEach(card => {
   });
 });
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const carousel = document.querySelector('.collections-carousel');
-    const cards = document.querySelectorAll('.collection-card');
-    const totalCards = cards.length;
-    let currentIndex = 0;
+// ==== RESPONSIVE TWO-AT-A-TIME COLLECTIONS CAROUSEL ====
+(function () {
+  const carousel = document.querySelector('.collections-carousel');
+  if (!carousel) return;
+  const cards = Array.from(carousel.children);
+  const totalCards = cards.length;
+  const cardsPerView = 2;
+  let currentIndex = 0;
+  let intervalId = null;
 
-    const getVisibleCards = () => {
-      const screenWidth = window.innerWidth;
-      if (screenWidth <= 768) return 2; // Mobile
-      if (screenWidth >= 769 && screenWidth <= 1024) return 2; // Tablet
-      return totalCards; // Show all cards on desktop
-    };
+  function getCardWidthWithGap() {
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    // gap from flex container, fallback to 0 if not set
+    const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+    return cardWidth + gap;
+  }
 
-    const updateCarousel = () => {
-      const cardWidth = cards[0].offsetWidth + 24; // width + gap (2.5em ≈ 24px)
-      const visible = getVisibleCards();
-      const maxIndex = totalCards - visible;
+  function slideTo(index) {
+    // On desktop, show all cards, no sliding
+    if (window.innerWidth > 768) {
+      carousel.style.transform = 'translateX(0)';
+      return;
+    }
+    // Only 2 slides: 0 (cards 0,1), 1 (cards 2,3)
+    const maxIndex = Math.ceil(totalCards / cardsPerView) - 1; // For 4 cards & 2 per view: maxIndex = 1
+    if (index > maxIndex) index = 0;
+    if (index < 0) index = maxIndex;
+    currentIndex = index;
 
-      // Reset index if out of bounds
-      if (currentIndex > maxIndex) currentIndex = 0;
+    const cardWidthWithGap = getCardWidthWithGap();
+    // We want to slide by: index * (cardsPerView * cardWidthWithGap)
+    const translateX = -currentIndex * cardsPerView * cardWidthWithGap;
+    carousel.style.transform = `translateX(${translateX}px)`;
+  }
 
-      const translateX = -currentIndex * cardWidth;
-      carousel.style.transform = `translateX(${translateX}px)`;
-    };
+  function nextSlide() {
+    slideTo(currentIndex + 1);
+  }
 
-    const autoSlide = () => {
-      const visible = getVisibleCards();
-      currentIndex += visible;
-      updateCarousel();
-    };
+  function resetInterval() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(nextSlide, 3000);
+  }
 
-    // Initial update
-    updateCarousel();
+  // Initial setup
+  slideTo(0);
+  resetInterval();
 
-    // Auto-slide every 3 seconds
-    setInterval(autoSlide, 3000);
-
-    // Resize listener to reset carousel
-    window.addEventListener('resize', () => {
-      currentIndex = 0;
-      updateCarousel();
-    });
+  // Resize: reset to first slide and re-calc
+  window.addEventListener('resize', () => {
+    slideTo(0);
+    resetInterval();
   });
-
+})();
