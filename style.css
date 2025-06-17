@@ -866,8 +866,7 @@ body {
     height: 120px;
   }
 }
-
-  @media (max-width: 768px) {
+@media (max-width: 768px) {
   .collections-carousel {
     display: flex;
     flex-direction: row;
@@ -875,13 +874,15 @@ body {
     width: 100vw;
     overflow: hidden;
     flex-wrap: nowrap;
+    transition: transform 0.7s cubic-bezier(.4,0,.2,1);
   }
   .collection-card {
-    flex: 0 0 calc((100vw - 1.2em) / 2); /* exactly two cards with gap */
+    flex: 0 0 calc((100vw - 1.2em) / 2);
     width: calc((100vw - 1.2em) / 2);
     min-width: unset;
     max-width: unset;
     box-sizing: border-box;
+    /* Other styling... */
   }
 }
   .product-sizes {
