@@ -91,64 +91,48 @@ document.querySelectorAll('.collection-card').forEach(card => {
     });
   });
 });
-// Interactive Size Bubbles
-document.querySelectorAll('.collection-card').forEach(card => {
-  const bubbles = card.querySelectorAll('.size-bubble');
-  bubbles.forEach(bubble => {
-    bubble.addEventListener('click', () => {
-      bubbles.forEach(b => b.classList.remove('active'));
-      bubble.classList.add('active');
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.querySelector('.collections-carousel');
+    const cards = document.querySelectorAll('.collection-card');
+    const totalCards = cards.length;
+    let currentIndex = 0;
+
+    const getVisibleCards = () => {
+      const screenWidth = window.innerWidth;
+      if (screenWidth <= 768) return 2; // Mobile
+      if (screenWidth >= 769 && screenWidth <= 1024) return 2; // Tablet
+      return totalCards; // Show all cards on desktop
+    };
+
+    const updateCarousel = () => {
+      const cardWidth = cards[0].offsetWidth + 24; // width + gap (2.5em ≈ 24px)
+      const visible = getVisibleCards();
+      const maxIndex = totalCards - visible;
+
+      // Reset index if out of bounds
+      if (currentIndex > maxIndex) currentIndex = 0;
+
+      const translateX = -currentIndex * cardWidth;
+      carousel.style.transform = `translateX(${translateX}px)`;
+    };
+
+    const autoSlide = () => {
+      const visible = getVisibleCards();
+      currentIndex += visible;
+      updateCarousel();
+    };
+
+    // Initial update
+    updateCarousel();
+
+    // Auto-slide every 3 seconds
+    setInterval(autoSlide, 3000);
+
+    // Resize listener to reset carousel
+    window.addEventListener('resize', () => {
+      currentIndex = 0;
+      updateCarousel();
     });
   });
-});
-
-// Responsive 2-at-a-time carousel for .collections-carousel
-(function () {
-  const carousel = document.querySelector('.collections-carousel');
-  if (!carousel) return;
-  const cards = Array.from(carousel.children);
-  let idx = 0;
-  const cardsPerView = 2;
-  let intervalId = null;
-
-  function getCardWidthWithGap() {
-    if (cards.length < 2) return cards[0].getBoundingClientRect().width;
-    const cardWidth = cards[0].getBoundingClientRect().width;
-    // Get gap between cards in px
-    const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
-    return cardWidth + gap;
-  }
-
-  function showSlide() {
-    if (window.innerWidth > 768) {
-      carousel.style.transform = 'translateX(0)';
-      return;
-    }
-    let cardWidth = getCardWidthWithGap();
-    // Number of valid "pages" is Math.ceil(cards.length/cardsPerView)
-    // idx can be 0, 1 (for 4 cards, 2 at a time)
-    if (idx > Math.ceil(cards.length / cardsPerView) - 1) idx = 0;
-    carousel.style.transform = `translateX(-${idx * cardWidth * cardsPerView}px)`;
-  }
-
-  function nextSlide() {
-    if (window.innerWidth > 768) return;
-    idx += 1;
-    if (idx > Math.ceil(cards.length / cardsPerView) - 1) idx = 0;
-    showSlide();
-  }
-
-  function setupInterval() {
-    if (intervalId) clearInterval(intervalId);
-    intervalId = setInterval(nextSlide, 3000);
-  }
-
-  window.addEventListener('resize', () => {
-    showSlide();
-    setupInterval();
-  });
-
-  showSlide();
-  setupInterval();
-})();
 
