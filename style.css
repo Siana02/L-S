@@ -866,24 +866,24 @@ body {
     height: 120px;
   }
 }
-@media (max-width: 768px) {
+
+  @media (max-width: 768px) {
   .collections-carousel {
+    display: flex;
+    flex-direction: row;
     gap: 1.2em;
-    transform: translateX(0); /* will be set by JS */
-  width: 100vw;
+    width: 100vw;
     overflow: hidden;
-    gap: 1.2em;
     flex-wrap: nowrap;
-    /* Prevent cards from shrinking */
   }
   .collection-card {
-    width: 44vw;
-    /* Remove min-width/max-width for mobile */
+    flex: 0 0 calc((100vw - 1.2em) / 2); /* exactly two cards with gap */
+    width: calc((100vw - 1.2em) / 2);
     min-width: unset;
     max-width: unset;
-    flex: 0 0 44vw;
-    padding: 0.7em 0.2em 1em 0.2em;
+    box-sizing: border-box;
   }
+}
   .product-sizes {
     gap: 0.28em;
   }
