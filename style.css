@@ -544,7 +544,7 @@ body {
 .product-name {
   font-family: 'Libre Franklin', sans-serif;
   font-weight: 700;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 2em;
   margin-bottom: 0.5em;
 }
@@ -565,7 +565,7 @@ body {
 }
 
 .product-price {
-  color: #fff;
+  color: #FFFFFF;
   font-size: 1.25em;
   font-weight: 700;
   margin-bottom: 1.2em;
@@ -870,11 +870,18 @@ body {
   .collections-carousel {
     gap: 1.2em;
     transform: translateX(0); /* will be set by JS */
+  width: 100vw;
+    overflow: hidden;
+    gap: 1.2em;
+    flex-wrap: nowrap;
+    /* Prevent cards from shrinking */
   }
   .collection-card {
     width: 44vw;
-    min-width: 145px;
-    max-width: 185px;
+    /* Remove min-width/max-width for mobile */
+    min-width: unset;
+    max-width: unset;
+    flex: 0 0 44vw;
     padding: 0.7em 0.2em 1em 0.2em;
   }
   .product-sizes {
@@ -884,12 +891,5 @@ body {
     width: 1.4em;
     height: 1.4em;
     font-size: 0.87em;
-  }
-}
-/* Only show 2 products at a time on mobile */
-@media (max-width: 768px) {
-  .collections-carousel {
-    width: 100vw;
-    overflow: hidden;
   }
 }
