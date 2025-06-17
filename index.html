@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Lace & Silk | Lingerie Shop</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes:400|Libre+Franklin:400,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <!-- Your main CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Popup Notification -->
+  <div class="popup-notification" id="sale-notification">
+    <span>🔥 Summer Sale Ongoing! Up to 40% OFF 🔥</span>
+    <button id="close-notification">&times;</button>
+  </div>
+
+  <header class="main-header">
+    <nav class="navbar">
+      <!-- Brand -->
+      <div class="brand">
+        <span class="brand-name">Lace & Silk</span>
+      </div>
+
+      <!-- LAPTOP: Search icon, nav, cart -->
+      <!-- TABLET: Search bar+icon, cart, hamburger -->
+      <!-- MOBILE: hamburger, brand, cart/search -->
+
+      <!-- LAPTOP (>=1025px) -->
+      <ul class="nav-links desktop-nav">
+        <li>
+          <button class="search-btn" id="desktop-search-btn" aria-label="Open Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button class="cart-btn" aria-label="Cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- TABLET NAV (769px-1024px) -->
+      <div class="tablet-nav">
+        <div class="tablet-center">
+          <div class="search-bar">
+            <input type="text" placeholder="Search..." aria-label="Search products">
+            <button class="search-btn" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <button class="cart-btn" aria-label="Cart">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+        <button class="hamburger" id="tablet-hamburger" aria-label="Open Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- MOBILE NAV (<=768px) -->
+      <div class="mobile-nav-bar">
+        <button class="hamburger" id="mobile-hamburger" aria-label="Open Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <span class="brand-name-mobile">Lace & Silk</span>
+        <div class="mobile-icons">
+          <button class="cart-btn" aria-label="Cart">
+            <i class="fas fa-shopping-cart"></i>
+          </button>
+          <button class="search-btn" id="mobile-search-btn" aria-label="Open Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- EXPANDING SEARCH BAR (for laptop search icon and mobile search icon clicks) -->
+      <div class="expand-search-bar" id="expand-search-bar">
+        <input type="text" placeholder="Search..." aria-label="Search products">
+        <button class="search-btn" aria-label="Search">
+          <i class="fas fa-search"></i>
+        </button>
+        <button class="close-expand-search" id="close-expand-search" aria-label="Close Search">&times;</button>
+      </div>
+    </nav>
+
+    <!-- MOBILE & TABLET DRAWER MENU -->
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <aside class="mobile-nav" id="mobile-nav">
+      <button class="close-mobile-nav" id="close-mobile-nav" aria-label="Close Menu">&times;</button>
+      <ul>
+        <li><a href="#collections" onclick="closeMobileNav()">Collections</a></li>
+        <li><a href="#about" onclick="closeMobileNav()">About</a></li>
+        <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+      </ul>
+    </aside>
+  </header>
+
+  <!-- Your main JS file -->
+  <script src="script.js"></script>
+</body>
+</html>
