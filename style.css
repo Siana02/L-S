@@ -457,15 +457,26 @@ body {
     font-size: 1em;
   }
 }
+
 .best-sellers-carousel {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  min-height: 420px;
-  background: transparent;
-  margin: 3em 0 0 0;
+  min-height: 400px;
+  margin: 3em 0;
   position: relative;
+}
+
+.carousel-header {
+  width: 100%;
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  color: #FF2E2E;
+  font-size: 2.2em;
+  margin-bottom: 1.4em;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.12);
 }
 
 .carousel-track {
@@ -516,7 +527,6 @@ body {
   box-shadow: 0 4px 32px rgba(0,0,0,0.12);
 }
 
-/* Glassmorphic description panel */
 .carousel-desc.glass {
   flex: 1 1 50%;
   padding: 2.2em 2em;
@@ -587,19 +597,20 @@ body {
   font-size: 1.1em;
 }
 
-/* Responsive styles */
-@media (max-width: 900px) {
-  .carousel-desc.glass { padding: 1.2em 1em; }
-  .product-name { font-size: 1.3em; }
-}
-
+/* Responsive styles: mobile layout fix */
 @media (max-width: 700px) {
-  .carousel-track, .carousel-slide { min-height: 0; }
+  .carousel-track {
+    min-height: 0;
+    max-width: 98vw;
+    margin: 0 auto;
+  }
   .carousel-slide,
   .carousel-slide.active {
     flex-direction: column;
     align-items: stretch;
     position: absolute;
+    min-height: 0;
+    height: auto;
   }
   .carousel-img,
   .carousel-desc.glass {
@@ -618,6 +629,10 @@ body {
 }
 
 @media (max-width: 480px) {
+  .carousel-header {
+    font-size: 1.3em;
+    margin-bottom: 1em;
+  }
   .carousel-desc.glass { padding: 1em 0.7em; }
   .product-name { font-size: 1.08em; }
   .add-to-cart-btn { padding: 0.7em 0.7em; font-size: 0.95em; }
