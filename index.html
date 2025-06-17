@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Lace & Silk | Lingerie Shop</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Parisienne|Libre+Franklin:400,700|Great+Vibes&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (replace with your kit ID or use CDN below) -->
+  <script src="https://kit.fontawesome.com/your_kit_id.js" crossorigin="anonymous"></script>
+  <!-- Or use CDN: -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> -->
+
+  <!-- Your main CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Popup Notification -->
+  <div class="popup-notification" id="sale-notification">
+    <span>🔥 Summer Sale Ongoing! Up to 40% OFF 🔥</span>
+    <button id="close-notification">&times;</button>
+  </div>
+
+  <header class="main-header">
+    <nav class="navbar">
+      <div class="brand">
+        <span class="brand-name">Lace & Silk</span>
+      </div>
+      <ul class="nav-links desktop-nav">
+        <li>
+          <button class="search-btn" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </button>
+        </li>
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="cart-btn" aria-label="Cart">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+        <div class="search-bar">
+          <input type="text" placeholder="Search..." aria-label="Search products">
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <button class="hamburger" id="open-mobile-nav" aria-label="Open Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+    <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+    <aside class="mobile-nav" id="mobile-nav">
+      <button class="close-mobile-nav" id="close-mobile-nav" aria-label="Close Menu">&times;</button>
+      <ul>
+        <li><a href="#collections" onclick="closeMobileNav()">Collections</a></li>
+        <li><a href="#about" onclick="closeMobileNav()">About</a></li>
+        <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+        <li>
+          <button class="search-btn" onclick="closeMobileNav()">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </li>
+      </ul>
+    </aside>
+  </header>
+
+  <!-- Your main JS file -->
+  <script src="script.js"></script>
+</body>
+</html>
