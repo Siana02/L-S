@@ -92,13 +92,23 @@ document.querySelectorAll('.collection-card').forEach(card => {
   });
 });
 
-// Collections Carousel for Mobile (≤ 768px)
+
 (function () {
   const carousel = document.querySelector('.collections-carousel');
   if (!carousel) return;
   const cards = Array.from(carousel.children);
   let idx = 0;
   let cardsPerView = 2;
+  let intervalId = null;
+
+  function getCardWidthWithGap() {
+    // Use getBoundingClientRect for accurate card width
+    if (cards.length < 2) return cards[0].getBoundingClientRect().width;
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    // Find gap (gap is set in px, fallback to 0)
+    const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+    return cardWidth + gap;
+  }
 
   function showSlide() {
     if (window.innerWidth > 768) {
@@ -106,10 +116,7 @@ document.querySelectorAll('.collection-card').forEach(card => {
       return;
     }
     cardsPerView = 2;
-    const card = cards[0];
-    const gap = parseInt(getComputedStyle(carousel).gap) || 0;
-    const cardWidth = card.offsetWidth + gap;
-    // Limit idx to valid starting indexes (0 or 2 for 4 products and 2 per view)
+    let cardWidth = getCardWidthWithGap();
     if (idx > cards.length - cardsPerView) idx = 0;
     carousel.style.transform = `translateX(-${idx * cardWidth}px)`;
   }
@@ -117,15 +124,21 @@ document.querySelectorAll('.collection-card').forEach(card => {
   function nextSlide() {
     if (window.innerWidth > 768) return;
     idx += 2;
-    if (idx >= cards.length) idx = 0;
+    if (idx > cards.length - cardsPerView) idx = 0;
     showSlide();
   }
 
-  let timer = setInterval(nextSlide, 3000);
+  // Always reset interval on resize to avoid weird timing
+  function setupInterval() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(nextSlide, 3000);
+  }
 
   window.addEventListener('resize', () => {
     showSlide();
+    setupInterval();
   });
 
   showSlide();
+  setupInterval();
 })();
