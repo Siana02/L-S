@@ -709,3 +709,187 @@ body {
     border-radius: 1em;
   }
 }
+.collections-section {
+  width: 100%;
+  background: #fff;
+  padding: 3em 0 2em 0;
+  border-radius: 1.5em;
+  margin: 2em auto 0 auto;
+  max-width: 1200px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+  overflow-x: hidden;
+}
+.collections-header {
+  text-align: center;
+  color: #FF2E2E;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.2em;
+  margin-bottom: 2em;
+  letter-spacing: 1px;
+}
+.collections-carousel {
+  display: flex;
+  gap: 2.5em;
+  justify-content: center;
+  align-items: stretch;
+  transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+}
+.collection-card {
+  background: rgba(255,255,255,0.82);
+  border-radius: 1.1em;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 1.2em 1em 1.8em 1em;
+  text-align: center;
+  width: 240px;
+  min-width: 200px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product-img-box {
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto 1.2em auto;
+  position: relative;
+  border-radius: 0.9em;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+.product-img-box img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 0.9em;
+  display: block;
+}
+.sale-label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #FF2E2E;
+  color: #fff;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 0.95em;
+  font-weight: 700;
+  padding: 0.3em 1em;
+  border-radius: 14px;
+  z-index: 2;
+  box-shadow: 0 2px 12px rgba(255,46,46,0.07);
+  letter-spacing: 0.06em;
+}
+.product-category {
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 0.98em;
+  color: #FF2E2E;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  margin-bottom: 0.3em;
+}
+.product-name {
+  font-family: 'Parisienne', cursive;
+  font-size: 1.3em;
+  color: #111;
+  margin-bottom: 0.7em;
+  letter-spacing: 0.06em;
+}
+.product-sizes {
+  display: flex;
+  justify-content: center;
+  gap: 0.6em;
+  margin-bottom: 1em;
+}
+.size-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1em;
+  height: 2.1em;
+  border-radius: 50%;
+  border: 2px solid #FF2E2E;
+  color: #FF2E2E;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s;
+  user-select: none;
+}
+.size-bubble.active,
+.size-bubble:hover {
+  background: #FF2E2E;
+  color: #fff;
+}
+.product-price {
+  font-size: 1.25em;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+.add-to-cart-btn {
+  background: #FF2E2E;
+  color: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 0.7em 2.1em;
+  font-size: 1.05em;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7em;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  box-shadow: 0 2px 12px rgba(255,46,46,0.08);
+}
+.add-to-cart-btn:hover {
+  background: #fff;
+  color: #FF2E2E;
+  border: 2px solid #FF2E2E;
+}
+/* Responsive: Mobile - 2 cards at a time, auto-slide */
+@media (max-width: 900px) {
+  .collection-card {
+    width: 44vw;
+    min-width: 170px;
+    max-width: 220px;
+    padding: 1em 0.5em 1.3em 0.5em;
+  }
+  .product-img-box {
+    max-width: 130px;
+    height: 120px;
+  }
+  .product-img-box img {
+    height: 120px;
+  }
+}
+@media (max-width: 768px) {
+  .collections-carousel {
+    gap: 1.2em;
+    transform: translateX(0); /* will be set by JS */
+  }
+  .collection-card {
+    width: 44vw;
+    min-width: 145px;
+    max-width: 185px;
+    padding: 0.7em 0.2em 1em 0.2em;
+  }
+  .product-sizes {
+    gap: 0.28em;
+  }
+  .size-bubble {
+    width: 1.4em;
+    height: 1.4em;
+    font-size: 0.87em;
+  }
+}
+/* Only show 2 products at a time on mobile */
+@media (max-width: 768px) {
+  .collections-carousel {
+    width: 100vw;
+    overflow: hidden;
+  }
+}
