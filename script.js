@@ -89,7 +89,9 @@ document.querySelectorAll('.collection-card').forEach(card => {
       bubbles.forEach(b => b.classList.remove('active'));
       bubble.classList.add('active');
     });
+    });
 });
+
 // Reviews Carousel Auto-Slide
 (function() {
   const slides = document.querySelectorAll('.reviews-carousel .review-slide');
